@@ -30,9 +30,12 @@ body{
 #start_screen{
 	position: absolute;
 	left: 10%;
-	bottom: 10%;
 	top: 10%;
-	width: 80%;
+	width: 1000px;
+	height: 500px;
+	border-radius: 15px;
+	background-color: #1de5d1;
+	overflow: hidden;
 }
 
 #username{
@@ -80,6 +83,8 @@ body{
 input{
 	-webkit-box-shadow: none;
     -moz-box-shadow: none;
+    background-color: #1de5d1;
+    border: none;
 }
 
 #play_button{
@@ -101,14 +106,4 @@ input{
 	left: 30%;
 	right: 30%;
 	text-align: center;	
-}
-
-#canvas{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: white;
-	border-radius: 15px;
 }

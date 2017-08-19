@@ -4,6 +4,7 @@ function initialSetup(){
 
 	var playButton = document.getElementById('play');
 	playButton.addEventListener('click', startGame);
+	
 
 }
 
