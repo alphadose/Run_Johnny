@@ -19,15 +19,17 @@ function startGame(){
 	playButton.style.zIndex = -1;
 	gameName.style.zIndex = -1;
 	nameInput.style.zIndex = -1;
-	username.innerHTML  = name.value;
+
+	if (name.value){
+		username.innerHTML  = name.value;
+	}
+	else{
+		username.innerHTML = "Codzilla";
+	}
 	instructions.style.zIndex = -1;
 
 	var canvas = document.getElementById('canvas');
 	var ctx = canvas.getContext('2d');
-	ctx.beginPath();
-	canvas.width = canvas.width;
-	canvas.height = canvas.height;
-	ctx.moveTo(0, (2*canvas.height)/3);
-	ctx.lineTo(2*canvas.width, (2*canvas.height)/3);
-	ctx.stroke();
+	
+	var gamePlay = new gameplay(ctx, canvas.width, canvas.height);
 }
