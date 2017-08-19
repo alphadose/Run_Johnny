@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head lang = 'en'>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1 user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link href="https://fonts.googleapis.com/css?family=Saira+Semi+Condensed" rel="stylesheet">
+	<title>
+		Lava Runner
+	</title>
+</head>
+<body>
+	<div class = "topbar">
+		<span id = "logo">
+			LAVA RUNNER
+		</span>
+	</div>
+	<div id = "game_view">
+		<div id = "start_screen">
+			<div id = "username">
+			</div>
+			<div id = "scores">
+				<div id = "present_score">
+					Score : 0
+				</div>
+				<div id = "high_score">
+					Highscore : 0
+				</div>
+			</div>
+			<div id = "game_name">
+				LAVA RUNNER
+			</div>
+			<div id = "name_input">
+				<input autocomplete = "off" type = "text" id = "name" placeholder = "NAME">
+			</div>
+			<div id = "play_button">
+				<button id = "play">
+					Play
+				</button>
+			</div>
+			<div id = "instructions">
+				Save little Johnny as he runs for his life!
+				<br>
+				Press spacebar or right-click mouse button to jump.
+			</div>
+			<canvas id = "canvas">
+
+			</canvas>
+		</div>
+	</div>
+</body>
+
+<!--<script type = "text/javascript" src = "/js/gameplay.js"></script>
+<script type = "text/javascript" src = "/js/game.js"></script>-->
+<script src="/js/phaser.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/stateMain.js"></script>
+
+</html>
