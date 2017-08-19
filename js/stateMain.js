@@ -1,19 +1,32 @@
 var block_vel= -160;
-var c=0;
+var score=0;
+var scoreText;
+function End(block,hero){
+
+  alert("Your score is "+score);
+  block.kill();
+  location.reload(true);
+}
+function scoreup()
+{
+  score++;
+  scoreText.text = 'Score: ' + score;
+}
 var StateMain = {
     preload: function() {
         game.load.image("ground", "images/ground.png");
-    game.load.image("background", "images/image.png");
         game.load.image("bar", "images/powerbar.png");
+        game.load.image("background", "images/image.png");
         game.load.image("block", "images/block.png");
         game.load.image("spike", "images/spike.png");
+        game.load.image("fire", "images/zz.png");
         game.load.spritesheet('hero', 'images/dude.png', 32, 48);
 
     },
     create: function() {
 
         game.stage.backgroundColor = "#00ffff";
-        game.add.tileSprite(0, 0, 1000, 500, 'background');
+          game.add.tileSprite(0, 0, 1000, 500, 'background');
         //add the ground
         this.platforms = game.add.group();
 
@@ -21,8 +34,9 @@ var StateMain = {
 
         this.ground =game.add.sprite(0, game.world.height*.9, 'ground');
         //add the hero in
+        setInterval(scoreup,100);
         this.hero = game.add.sprite(70, this.ground.height - 50, "hero");
-
+        scoreText = game.add.text(800, 16, 'score: 0', { fontSize: '32px', fill: 'white' });
         //start the physics engine
         game.physics.startSystem(Phaser.Physics.ARCADE);
         game.physics.arcade.enable(this.hero);
@@ -36,15 +50,15 @@ var StateMain = {
         //record the initial position
         this.startY = this.hero.y;
         this.hero.animations.play('right');
-        this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
         cursors = game.input.keyboard.createCursorKeys();
-        game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR]);
+        game.input.keyboard.addKeyCapture([Phaser.Keyboard.SPACEBAR ]);
         this.blocks = game.add.group();
         this.makeBlocks();
     },
 
     doJump: function() {
-        this.hero.body.velocity.y = -350;
+        this.hero.body.velocity.y = -380;
     },
     makeBlocks: function() {
         this.blocks.removeAll();
@@ -66,13 +80,14 @@ var StateMain = {
             game.physics.enable(block, Phaser.Physics.ARCADE);
             //set the x velocity to -160
             block.body.velocity.x = block_vel;
+            block.body.acceleration.x = -30*game.rnd.integerInRange(1,3);
 
 
             block.body.gravity.y =0;
 
             block.body.bounce.set(1, 1);
         });
-        block_vel-=50;
+        block_vel-=30;
     },
 
 
@@ -81,7 +96,7 @@ var StateMain = {
         //
         //collide the hero with the blocks
         //
-        game.physics.arcade.collide(this.hero, this.blocks);
+        //game.physics.arcade.collide(this.hero, this.blocks);
         //
         //colide the blocks with the ground
         //
@@ -90,11 +105,9 @@ var StateMain = {
         //when only specifying one group, all children in that
         //group will collide with each other
         //
-        //game.physics.arcade.collide(this.blocks);
+        game.physics.arcade.collide(this.blocks);
 
-        //game.physics.arcade.overlap(this.blocks, this.hero, this.End(), null, this);
-
-        /**if(cursors.right.isDown)
+        if(cursors.right.isDown)
         {
           this.hero.animations.play('right');
 
@@ -107,8 +120,8 @@ var StateMain = {
 
           this.hero.body.velocity.x-= 4;
 
-        }**/
-        if (this.spaceKey.isDown && this.hero.body.touching.down)
+        }
+        if (cursors.up.isDown && this.hero.body.touching.down)
         {
           //this.hero.animations.stop();
           this.doJump();
@@ -117,14 +130,13 @@ var StateMain = {
 
         //get the first child
         var fchild = this.blocks.getChildAt(0);
+        game.physics.arcade.overlap(this.blocks, this.hero,End, null, this);
         //if off the screen reset the blocks
         if (fchild.x < -game.width) {
             this.makeBlocks();
         }
 
-    },
-    End: function(block,hero){
 
-      this.hero.kill();
     }
+
 }

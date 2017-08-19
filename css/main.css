@@ -1,6 +1,6 @@
 body{
 	margin: 0;
-}	
+}
 
 #game_view{
 	position: absolute;
@@ -43,13 +43,8 @@ body{
 	left: 20px;
 	z-index: 1;
 	display: hidden;
-}
-
-#scores{
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	z-index: 1; 
+	color: white;
+	font-size: 32px;
 }
 
 #game_name{
