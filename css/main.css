@@ -8,7 +8,6 @@ body{
 	top:50px;
 	bottom: 0;
 	background-color: #1fb1c4;
-	background-color: #bf1e09;
 }
 
 .topbar{
@@ -34,7 +33,7 @@ body{
 	width: 1000px;
 	height: 500px;
 	border-radius: 15px;
-	background-color: #1de5d1;
+	background-color: #d85743;
 	overflow: hidden;
 }
 
@@ -83,8 +82,10 @@ body{
 input{
 	-webkit-box-shadow: none;
     -moz-box-shadow: none;
-    background-color: #1de5d1;
     border: none;
+    background-color: #d85743;
+    color: #ede628;
+    border-color: #ede628;
 }
 
 #play_button{
@@ -105,5 +106,23 @@ input{
 	top: 70%;
 	left: 30%;
 	right: 30%;
-	text-align: center;	
+	text-align: center;
+	border-radius: 5px;
+	height: 60px;
+	line-height: 30px;
+	font-size: 20px;
+}
+
+button{
+	display: block;
+	background-color: #ede628;
+	border: none;
+	cursor: pointer;
+	height: 30px;
+	width: 150px;
+	font-size: 25px;
+	border-radius: 5px;
+}
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: #ede628;
 }
