@@ -8,6 +8,8 @@ function End(block, hero) {
 
   alert("Your score is " + score);
   block.kill();
+  var name=document.getElementById("username").innerHTML;
+  $.post( "/store", { name: name, score: score } );
   location.reload(true);
 
 }
@@ -49,6 +51,7 @@ var StateMain = {
     });
 
     game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.setBoundsToWorld();
     game.physics.arcade.enable(this.hero);
 
     game.physics.enable(this.ground, Phaser.Physics.ARCADE);
@@ -64,6 +67,7 @@ var StateMain = {
 
     cursors = game.input.keyboard.createCursorKeys();
     this.blocks = game.add.group();
+    this.blocks.checkWorldBounds=true;
     this.asteroids = game.add.group();
     this.makeBlocks();
     this.makeAsteroids();
@@ -89,7 +93,7 @@ var StateMain = {
       game.physics.enable(block, Phaser.Physics.ARCADE);
 
       block.body.velocity.x = block_vel;
-      block.body.acceleration.x = -30 * game.rnd.integerInRange(1, 3);
+      block.body.acceleration.x = (score/100)*block_vel*game.rnd.integerInRange(0, 1);
 
 
       block.body.gravity.y = 0;
@@ -97,24 +101,26 @@ var StateMain = {
       block.body.bounce.set(1, 1);
     });
     block_vel -= 30;
+    this.blocks.checkWorldBounds=true;
   },
   makeAsteroids: function() {
     this.asteroids.removeAll();
+
     if (score >= 500)
       count = 5;
     else
-      count = score / 100;
+      count = score / 100 + 1;
 
 
 
     for (var i = 0; i < count; i++) {
-      var asteroid = game.add.sprite(150 * (i), 0, "asteroid");
+      var asteroid = game.add.sprite(100 * (i), 0, "asteroid");
 
       asteroid.scale.setTo(0.45, 0.45);
 
       this.asteroids.add(asteroid);
     }
-    this.asteroids.x = game.width - this.asteroids.width - 120;
+    this.asteroids.x = game.width - this.asteroids.width;
     this.asteroids.y = this.ground.y - 400;
 
     this.asteroids.forEach(function(asteroid) {
@@ -122,7 +128,7 @@ var StateMain = {
       game.physics.enable(asteroid, Phaser.Physics.ARCADE);
 
       asteroid.body.velocity.x = asteroid_vel;
-      asteroid.body.acceleration.x = -80 * game.rnd.integerInRange(-1, 3);
+      asteroid.body.acceleration.x = -80 * game.rnd.integerInRange(0, 3);
       asteroid.body.gravity.y = 300;
       asteroid.body.bounce.set(0.5, 0.5);
 
@@ -144,13 +150,13 @@ var StateMain = {
     if (cursors.right.isDown) {
       this.hero.animations.play('right');
 
-      this.hero.body.velocity.x += 4;
+      this.hero.body.velocity.x += 7;
 
     }
     if (cursors.left.isDown) {
       this.hero.animations.play('left');
 
-      this.hero.body.velocity.x -= 4;
+      this.hero.body.velocity.x -= 7;
 
     }
     if (cursors.up.isDown && this.hero.body.touching.down) {
@@ -159,15 +165,18 @@ var StateMain = {
     game.physics.arcade.overlap(this.blocks, this.hero, End, null, this);
 
     var fchild = this.blocks.getChildAt(0);
-
-    if (fchild.x < -game.width) {
+    if (fchild.x < -game.width){
       this.makeBlocks();
     }
+
+
     var schild = this.asteroids.getChildAt(0);
 
     if (schild.x < -game.width) {
       this.makeAsteroids();
     }
+
+    //fchild.events.onOutOfBounds.add(this.makeBlocks, this);
 
 
   }
