@@ -38,6 +38,7 @@ body {
 }
 
 #username {
+  font-family: 'Saira Semi Condensed', sans-serif;
   position: absolute;
   top: 20px;
   left: 20px;

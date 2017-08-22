@@ -27,7 +27,7 @@ var StateMain = {
     game.load.image("block", "images/block.png");
     game.load.image("spike", "images/spike.png");
     game.load.image("fire", "images/zz.png");
-    game.load.image("asteroid", "images/asteroid.png");
+    game.load.image("asteroid", "images/asteroid2.png");
     game.load.spritesheet('hero', 'images/dude.png', 32, 48);
 
   },
@@ -133,7 +133,7 @@ var StateMain = {
       asteroid.body.bounce.set(0.5, 0.5);
 
     });
-    asteroid_vel -= 20;
+    asteroid_vel -= 10;
   },
 
 
@@ -150,7 +150,7 @@ var StateMain = {
     if (cursors.right.isDown) {
       this.hero.animations.play('right');
 
-      this.hero.body.velocity.x += 7;
+      this.hero.body.velocity.x += 5;
 
     }
     if (cursors.left.isDown) {
@@ -164,16 +164,22 @@ var StateMain = {
     }
     game.physics.arcade.overlap(this.blocks, this.hero, End, null, this);
 
-    var fchild = this.blocks.getChildAt(0);
+    var fchild = this.blocks.getChildAt(this.blocks.length-1);
     if (fchild.x < -game.width){
       this.makeBlocks();
     }
+    else {
+      fchild.body.velocity.x -= 2;
+    }
 
 
-    var schild = this.asteroids.getChildAt(0);
+    var schild = this.asteroids.getChildAt(this.asteroids.length-1);
 
     if (schild.x < -game.width) {
       this.makeAsteroids();
+    }
+    else {
+      schild.body.velocity.x -= 2;
     }
 
     //fchild.events.onOutOfBounds.add(this.makeBlocks, this);
