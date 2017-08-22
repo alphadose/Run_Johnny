@@ -22,12 +22,9 @@ var StateMain = {
   preload: function() {
 
     game.load.image("ground", "images/ground.png");
-    game.load.image("bar", "images/powerbar.png");
     game.load.image("background", "images/image.png");
-    game.load.image("block", "images/block.png");
     game.load.image("spike", "images/spike.png");
-    game.load.image("fire", "images/zz.png");
-    game.load.image("asteroid", "images/asteroid2.png");
+    game.load.image("asteroid", "images/asteroid.png");
     game.load.spritesheet('hero', 'images/dude.png', 32, 48);
 
   },
