@@ -64,6 +64,6 @@ app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
-var server = app.listen(3000, function() {
-  console.log('Magic is happening on port 3000')
+var server = app.listen(process.env.PORT || 5000, function() {
+  console.log('Magic is happening on port '+ process.env.PORT)
 });
