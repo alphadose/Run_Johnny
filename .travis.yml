@@ -4,10 +4,13 @@ node_js:
   - "8"
 before_install:
   - npm i -g npm@5.3.0
+  - mysql -e 'CREATE DATABASE runner;'
 install: npm install
 cache:
   directories:
     - "node_modules"
+services:
+  - mysql
 script: node server.js
 deploy:
   skip_cleanup: true
