@@ -1,11 +1,11 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const $ = require('jquery');
-const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'development';
-const config = require(__dirname + '/config.json')[env];
-const bodyParser = require('body-parser');
+var express = require('express');
+var app = express();
+var path = require('path');
+var $ = require('jquery');
+var Sequelize = require('sequelize');
+var env = process.env.NODE_ENV || 'development';
+var config = require(__dirname + '/config.json')[env];
+var bodyParser = require('body-parser');
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
