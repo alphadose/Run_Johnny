@@ -11,5 +11,3 @@ cache:
     - "node_modules"
 services:
   - mysql
-deploy:
-  skip_cleanup: true
