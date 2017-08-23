@@ -4,6 +4,7 @@
 
 ### Brief overview of the game :-
 
+
 * In this game you have to evade spikes which will approach you at a random velocity.
 
 * You have to use the directional keys to evade those spikes.
@@ -24,7 +25,9 @@
 
 * Your score is determined by how long you can last in the game.
 
-### How to run locally
+
+### How to run locally :-
+
 
 1. Clone this repository.
 
