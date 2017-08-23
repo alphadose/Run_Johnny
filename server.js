@@ -7,7 +7,7 @@ const env = process.env.NODE_ENV || 'production';
 const config = require(__dirname + '/config.json')[env];
 const bodyParser = require('body-parser');
 
-const sequelize = new Sequelize(config.database, config.username, config.password,config );
+const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 sequelize.authenticate().then(() => {
     console.log('Connection has been established successfully.');
@@ -54,10 +54,6 @@ app.post('/store', function(req, res) {
         })
       }
     })
-
-
-
-  console.log('you posted: Name: ' + req.body.name + ', Score: ' + req.body.score);
 });
 
 app.get('/', function(req, res) {
@@ -65,5 +61,5 @@ app.get('/', function(req, res) {
 });
 
 var server = app.listen(process.env.PORT || 5000, function() {
-  console.log('Magic is happening on port '+ process.env.PORT)
+  console.log('Magic is happening on port ' + process.env.PORT)
 });
