@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
+    "password": "alphakimori",
     "database": "runner",
     "host": "localhost",
     "dialect": "mysql"
