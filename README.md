@@ -16,9 +16,22 @@ Aside from the spikes there are asteroids.
 
 Asteroids won't kill you but they will hamper your gameplay by blocking your jumps, colliding with you and changing your velocity etc.
 
-Asteroids are a double-edged sword. They will ruin your gameplay but at the same time they can also aid you. 
+Asteroids are a double-edged sword. They will ruin your gameplay but at the same time they can also aid you.
 
 You can junp on an asteroid and evade the spikes.
 
 Your score is determined by how long you can last in the game.
 
+#How to run locally
+
+cd into the root directory
+
+npm install
+
+cp sample.config.json config.json
+
+modify the the environment variables for the development section as per your database credentials
+
+node server.js
+
+you can now run the game at http://localhost:5000
