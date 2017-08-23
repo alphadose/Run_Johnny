@@ -4,22 +4,20 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "express": "^4.15.4"
   },
-  "scripts": {
-    "start": "node server.js"
-  },
   "dependencies": {
-    "express": "^4.15.4",
     "body-parser": "^1.17.2",
+    "express": "^4.15.4",
     "foreman": "2.0.0",
     "jquery": "^3.2.1",
     "mysql2": "^1.4.1",
+    "pg": "^7.2.0",
     "sequelize": "^4.6.0",
     "sequelize-cli": "^2.8.0"
   }

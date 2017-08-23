@@ -7,7 +7,16 @@ const env = process.env.NODE_ENV || 'production';
 const config = require(__dirname + '/config.json')[env];
 const bodyParser = require('body-parser');
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+const sequelize = new Sequelize(config.database, config.username, config.password,{
+    dialect:  'postgres',
+    protocol: 'postgres',
+    port:     5432,
+    host:     'd5aouostsepgig',
+    logging: false,
+    dialectOptions: {
+        ssl: true
+    }
+});
 
 sequelize.authenticate().then(() => {
     console.log('Connection has been established successfully.');
