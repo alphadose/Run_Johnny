@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
-sequelize.authenticate().then(() => {
+sequelize.authenticate().then((res) => {
     console.log('Connection has been established successfully.');
   })
   .catch((err) => {
