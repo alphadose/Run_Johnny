@@ -1,37 +1,58 @@
-# Run Johnny
+# Run Johnny  [![Build Status](https://travis-ci.org/alphadose/Run_Johnny.svg?branch=master)](https://travis-ci.org/alphadose/Run_Johnny)
 
-Run Johnny is an endless runner game built on phaser and nodejs
+> Run Johnny is an endless runner game built on phaser and nodejs
 
-In this game you have to evade spikes which will approach you at a random velocity.
+### Brief overview of the game :-
 
-You have to use the directional keys to evade those spikes.
+* In this game you have to evade spikes which will approach you at a random velocity.
 
-The spikes might collide with each other making the already randomized velocities even more random.
+* You have to use the directional keys to evade those spikes.
 
-The velocity might vary from time to time because of the acceleration setting so the spikes might approach you too quickly or too slowly.
+* The spikes might collide with each other making the already randomized velocities even more random.
 
-Acceleration can even change midway.
+* The velocity might vary from time to time because of the acceleration setting so the spikes might approach you too quickly or too slowly.
 
-Aside from the spikes there are asteroids.
+* Acceleration can even change midway.
 
-Asteroids won't kill you but they will hamper your gameplay by blocking your jumps, colliding with you and changing your velocity etc.
+* Aside from the spikes there are asteroids.
 
-Asteroids are a double-edged sword. They will ruin your gameplay but at the same time they can also aid you.
+* Asteroids won't kill you but they will hamper your gameplay by blocking your jumps, colliding with you , changing your velocity etc.
 
-You can junp on an asteroid and evade the spikes.
+* Asteroids are a double-edged sword. They will ruin your gameplay but at the same time they can also aid you.
 
-Your score is determined by how long you can last in the game.
+* You can junp on an asteroid and evade the spikes.
 
-# How to run locally
+* Your score is determined by how long you can last in the game.
 
-cd into the root directory
+### How to run locally
 
-npm install
+1. Clone this repository.
 
-cp sample.config.json config.json
+   ```
+   git clone https://github.com/alphadose/Run_Johnny.git
+   ```
 
-modify the the environment variables for the development section as per your database credentials
+2. Go to the root directory of the game.
 
-node server.js
+   ```
+   cd <path_to_directory>
+   ```
+   
+3. Install the necessary dependencies.
+  
+   ```  
+   npm install
+   ```
+   
+4. Create a config.json file from the sample.config.json and fill in the environment variables as per your database              credentials.
 
-you can now run the game at http://localhost:5000
+    ```
+    cp sample.config.json config.json
+    ```
+5. Start the game.
+
+     ```
+     node server.js
+     ```
+
+6. You can now play the game at http://localhost:5000
