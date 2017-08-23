@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
-sequelize.authenticate().then((res) => {
+sequelize.authenticate().then(function() {
     console.log('Connection has been established successfully.');
   })
   .catch((err) => {
@@ -47,7 +47,7 @@ app.post('/store', function(req, res) {
         score: req.body.score
       }
     })
-    .spread((user, created) => {
+    .spread(function(user, created) {
       if (created == false && req.body.score > user.score) {
         user.updateAttributes({
           score: req.body.score
