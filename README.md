@@ -22,7 +22,7 @@ You can junp on an asteroid and evade the spikes.
 
 Your score is determined by how long you can last in the game.
 
-#How to run locally
+# How to run locally
 
 cd into the root directory
 
