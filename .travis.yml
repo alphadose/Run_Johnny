@@ -1,5 +1,13 @@
 language: node_js
+node_js:
+  - "node"
+  - "8"
+before_install:
+  - npm i -g npm@5.3.0
 install: npm install
+cache:
+  directories:
+    - "node_modules"
 script: node server.js
 deploy:
   skip_cleanup: true
