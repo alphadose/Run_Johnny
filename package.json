@@ -11,6 +11,9 @@
   "devDependencies": {
     "express": "^4.15.4"
   },
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "foreman": "2.0.0",
