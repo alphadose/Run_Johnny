@@ -3,7 +3,7 @@ const app = express();
 const path = require('path');
 const $ = require('jquery');
 const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'production';
 const config = require(__dirname + '/config.json')[env];
 const bodyParser = require('body-parser');
 
