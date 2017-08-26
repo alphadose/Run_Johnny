@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/config.json')[env];
 const bodyParser = require('body-parser');
 
@@ -29,6 +29,7 @@ scores.sync();
 app.set('view engine', 'ejs');
 
 app.use('/css', express.static(__dirname + '/css'));
+app.use('/audio', express.static(__dirname + '/audio'));
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/images', express.static(__dirname + '/images'));
 app.use(bodyParser.json());

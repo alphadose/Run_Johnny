@@ -4,16 +4,6 @@ var scoreText;
 var asteroid_vel = -20;
 var count;
 
-function End(block, hero) {
-
-  alert("Your score is " + score);
-  block.kill();
-  var name=document.getElementById("username").innerHTML;
-  $.post( "/store", { name: name, score: score } );
-  location.reload(true);
-
-}
-
 function scoreup() {
   score++;
   scoreText.text = 'Score: ' + score;
@@ -25,6 +15,9 @@ var StateMain = {
     game.load.image("background", "images/image.png");
     game.load.image("spike", "images/spike.png");
     game.load.image("asteroid", "images/asteroid.png");
+    game.load.audio('jump', 'audio/jump.mp3');
+    game.load.audio('die', 'audio/die.mp3');
+    game.load.audio('theme', 'audio/theme.mp3');
     game.load.spritesheet('hero', 'images/dude.png', 32, 48);
 
   },
@@ -47,6 +40,12 @@ var StateMain = {
       fill: 'white'
     });
 
+    this.jump = game.add.audio('jump');
+    this.die = game.add.audio('die');
+    this.theme = game.add.audio('theme');
+    this.theme.loop = true;
+    this.theme.play();
+
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.setBoundsToWorld();
     game.physics.arcade.enable(this.hero);
@@ -64,15 +63,31 @@ var StateMain = {
 
     cursors = game.input.keyboard.createCursorKeys();
     this.blocks = game.add.group();
-    this.blocks.checkWorldBounds=true;
+    this.blocks.checkWorldBounds = true;
     this.asteroids = game.add.group();
     this.makeBlocks();
     this.makeAsteroids();
   },
 
+  End: function(block, hero) {
+
+    this.die.play();
+    alert("Your score is " + score);
+    block.kill();
+    var name = document.getElementById("username").innerHTML;
+    $.post("/store", {
+      name: name,
+      score: score
+    });
+    location.reload(true);
+
+  },
+
   doJump: function() {
+    this.jump.play();
     this.hero.body.velocity.y = -400;
   },
+
   makeBlocks: function() {
     this.blocks.removeAll();
     var wallHeight = game.rnd.integerInRange(1, 4);
@@ -90,7 +105,7 @@ var StateMain = {
       game.physics.enable(block, Phaser.Physics.ARCADE);
 
       block.body.velocity.x = block_vel;
-      block.body.acceleration.x = (score/100)*block_vel*game.rnd.integerInRange(0, 1);
+      block.body.acceleration.x = (score / 100) * block_vel * game.rnd.integerInRange(0, 1);
 
 
       block.body.gravity.y = 0;
@@ -98,7 +113,7 @@ var StateMain = {
       block.body.bounce.set(1, 1);
     });
     block_vel -= 30;
-    this.blocks.checkWorldBounds=true;
+    this.blocks.checkWorldBounds = true;
   },
   makeAsteroids: function() {
     this.asteroids.removeAll();
@@ -133,6 +148,15 @@ var StateMain = {
     asteroid_vel -= 10;
   },
 
+  overlapHandler: function(obj1, obj2) {
+
+    if (!obj1.hasOverlapped && !obj2.hasOverlapped) {
+        obj1.hasOverlapped = obj2.hasOverlapped = true;
+        obj2.angle += 180;
+        this.End(obj1, obj2);
+    }
+  },
+
 
   update: function() {
     game.physics.arcade.collide(this.hero, this.ground);
@@ -159,23 +183,21 @@ var StateMain = {
     if (cursors.up.isDown && this.hero.body.touching.down) {
       this.doJump();
     }
-    game.physics.arcade.overlap(this.blocks, this.hero, End, null, this);
+    game.physics.arcade.overlap(this.blocks, this.hero, this.overlapHandler, null, this);
 
-    var fchild = this.blocks.getChildAt(this.blocks.length-1);
-    if (fchild.x < -game.width){
+    var fchild = this.blocks.getChildAt(this.blocks.length - 1);
+    if (fchild.x < -game.width) {
       this.makeBlocks();
-    }
-    else {
+    } else {
       fchild.body.velocity.x -= 2;
     }
 
 
-    var schild = this.asteroids.getChildAt(this.asteroids.length-1);
+    var schild = this.asteroids.getChildAt(this.asteroids.length - 1);
 
     if (schild.x < -game.width) {
       this.makeAsteroids();
-    }
-    else {
+    } else {
       schild.body.velocity.x -= 2;
     }
 
