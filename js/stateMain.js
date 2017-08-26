@@ -151,9 +151,9 @@ var StateMain = {
   overlapHandler: function(obj1, obj2) {
 
     if (!obj1.hasOverlapped && !obj2.hasOverlapped) {
-        obj1.hasOverlapped = obj2.hasOverlapped = true;
-        obj2.angle += 180;
-        this.End(obj1, obj2);
+      obj1.hasOverlapped = obj2.hasOverlapped = true;
+      obj2.angle += 180;
+      this.End(obj1, obj2);
     }
   },
 
