@@ -14,10 +14,13 @@ function startGame() {
   var username = document.getElementById('username');
   var name = document.getElementById('name');
   var instructions = document.getElementById('instructions');
+  var leaderboard= document.getElementById('leaderboard_button');
 
   playButton.style.zIndex = -1;
   gameName.style.zIndex = -1;
   nameInput.style.zIndex = -1;
+  leaderboard.style.zIndex = -1;
+
 
   if (name.value) {
     username.innerHTML = name.value;

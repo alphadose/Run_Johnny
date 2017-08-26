@@ -91,6 +91,13 @@ input {
   left: 46%;
   right: 46%;
 }
+#leaderboard_button{
+  position: absolute;
+  z-index: 1;
+  top: 64%;
+  left: 42.5%;
+  right: 46%;
+}
 
 #play {
   width: 100%;
@@ -99,7 +106,7 @@ input {
 #instructions {
   position: absolute;
   z-index: 1;
-  top: 70%;
+  top: 74%;
   left: 30%;
   right: 30%;
   text-align: center;

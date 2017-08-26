@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Leaderboard</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css'>
+
+  <link rel="stylesheet" href="/css/style.css">
+
+
+</head>
+
+<body>
+  <div class="container" id="app">
+    <div class="row header">
+      <div class="card-panel mas-blue white-text center">
+        <h1>Leading Players</h1>
+      </div>
+    </div>
+    <div class="row content">
+      <div class="card-panel">
+        <div v-if="!loaded" class="center">
+          <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-green-only">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div>
+              <div class="gap-patch">
+                <div class="circle"></div>
+              </div>
+              <div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <table v-if="loaded" class="bordered">
+          <thead>
+            <tr>
+              <th class="hide-on-small-only">#</th>
+              <th>Name</th>
+              <th></th>
+              <th>Scores</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% leaderboard.forEach(function(instance,index) { %>
+              <tr>
+                <td class="hide-on-small-only">
+                  <%= index+1 %>
+                </td>
+                <td>
+                  <%= instance.username %>
+                </td>
+                <td></td>
+                <td>
+                  <%= instance.score %>
+                </td>
+              </tr>
+              <% }); %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+
+  <script src="/js/index.js"></script>
+
+</body>
+
+</html>

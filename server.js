@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const $ = require('jquery');
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/config.json')[env];
@@ -27,7 +26,8 @@ const scores = sequelize.define('scores', {
 
 scores.sync();
 
-app.use('/views', express.static(__dirname + '/views'));
+app.set('view engine', 'ejs');
+
 app.use('/css', express.static(__dirname + '/css'));
 app.use('/js', express.static(__dirname + '/js'));
 app.use('/images', express.static(__dirname + '/images'));
@@ -57,9 +57,23 @@ app.post('/store', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname + '/views/index.html'));
+  res.render('index');
 });
 
-var server = app.listen(process.env.PORT || 5000, function() {
-  console.log('Magic is happening on port ' + process.env.PORT)
+app.get('/leaderboard', function(req, res) {
+
+  scores.findAll({
+      attributes: ['username', 'score'],
+      order: [
+        ['score', 'DESC']
+      ]
+    })
+    .then(leaderboard => {
+      res.render('leaderboard',{leaderboard: leaderboard});
+    });
+});
+
+port = process.env.PORT || 5000;
+var server = app.listen(port, function() {
+  console.log('Magic is happening on port ' + port);
 });
