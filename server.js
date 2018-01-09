@@ -14,7 +14,7 @@ username = process.env.USERNAME || config.username;
 password = process.env.PASSWORD || config.password;
 server_info = {
   host: process.env.SERVER || config['host'],
-  dialect: 'mysql'|'sqlite'|'postgres'|'mssql'
+  dialect: process.env.DIALECT || config['dialect']
 };
 
 const sequelize = new Sequelize(database, username, password, server_info);
