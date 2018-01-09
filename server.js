@@ -1,12 +1,23 @@
 const express = require('express');
 const app = express();
+const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const env = process.env.NODE_ENV || 'production';
-const config = require(__dirname + '/config.json')[env];
+if (fs.existsSync(__dirname + '/config.json')) {
+    const config = require(__dirname + '/config.json')[env];
+}
 const bodyParser = require('body-parser');
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+database = process.env.DATABASE_NAME || config.database;
+username = process.env.USERNAME || config.username;
+password = process.env.PASSWORD || config.password;
+server_info = {
+  host: process.env.SERVER || config['host'],
+  dialect: 'mysql'|'sqlite'|'postgres'|'mssql'
+};
+
+const sequelize = new Sequelize(database, username, password, server_info);
 
 sequelize.authenticate().then(function() {
     console.log('Connection has been established successfully.');
